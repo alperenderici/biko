@@ -1,18 +1,16 @@
-import React, {useEffect, useState} from 'react';
-import getFolders from "../../api/getFolders";
+import {useEffect, useState} from "react";
 
-
-const MachinePage = ({id}) => {
-    const [folders, setFolders] = useState([]);
+const FileList = ({folder_name}) => {
+    const [files, setFiles] = useState([]);
 
     useEffect(() => {
-        const fetchFolders = async () => {
-            const folders = await getFolders(id);
-            setFolders(folders);
+        const fetchFiles = async () => {
+            const files = await getFiles(folder_name);
+            setFiles(files);
         }
 
-        fetchFolders();
-    });
+        fetchFiles();
+    })
 
     return (
         <div className="bg-gray min-h-screen">
@@ -26,9 +24,9 @@ const MachinePage = ({id}) => {
                 <div className="bg-white rounded p-8 shadow-lg">
                     <div className="text-2xl font-bold mb-4">A makinesi</div>
                     <div className="grid grid-cols-2 gap-4">
-                        {folders.map((folder) => (
+                        {files.map((file) => (
                             <div className="bg-gray-100 p-4 rounded">
-                                <div className="text-xl font-bold">{folder.name}</div>
+                                <div className="text-xl font-bold">{file.name}</div>
                             </div>
                         ))}
                     </div>
@@ -37,4 +35,3 @@ const MachinePage = ({id}) => {
         </div>
     );
 }
-export default MachinePage;

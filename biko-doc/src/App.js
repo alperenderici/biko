@@ -1,12 +1,12 @@
-import logo from './logo.svg';
 import './App.css';
+import MachinePage from "./pages/machine_page/machine_page";
 
 function App() {
-  return (
-    <h1 className="text-3xl font-bold underline">
-      Hello world!
-    </h1>
-  );
+    return (
+        <div className="App">
+            <MachinePage id="1Nb4EcfTI3bkMFOYG8nX4l92WaoHaYx4K"/>
+        </div>
+    );
 }
 
 export default App;

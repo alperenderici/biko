@@ -1,7 +1,7 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
 # dependencies
-/node_modules
+biko-doc/node_modules
 /.pnp
 .pnp.js
 
@@ -11,8 +11,12 @@
 # production
 /build
 
+biko-doc/src/credentials.json
+
+
 # misc
 .DS_Store
+biko-doc/.env
 .env.local
 .env.development.local
 .env.test.local
