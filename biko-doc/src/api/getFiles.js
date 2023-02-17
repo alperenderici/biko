@@ -1,4 +1,10 @@
-async function getFiles(folder_name) {
+import axios from "axios";
 
-    return [{name: "a"}, {name: "b"}, {name: "c"}];
+async function getFiles(folderId) {
+    const response = await axios.get(`http://localhost:7000/files/${folderId}`);
+    const files = response.data;
+
+    return files;
 }
+
+export default getFiles;

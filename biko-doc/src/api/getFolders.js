@@ -1,22 +1,8 @@
-import drive from "./google/drive.js"
+import axios from "axios";
 
 async function getFolders(machineId) {
-    let folders = [];
-
-    await drive.files.list({
-        q: `'${machineId}' in parents and mimeType = 'application/vnd.google-apps.folder'`,
-        fields: 'files(id, name)',
-    }, (err, res) => {
-        if (err) return console.log('The API returned an error: ' + err);
-        const files = res.data.files;
-        if (files.length) {
-            files.map((file) => {
-                folders.push(file);
-            });
-        } else {
-            console.log('No files found.');
-        }
-    });
+    const response = await axios.get(`http://localhost:7000/folders/${machineId}`);
+    const folders = response.data;
 
     return folders;
 }

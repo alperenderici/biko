@@ -1,12 +1,21 @@
-import './App.css';
+import ReactDOM from "react-dom/client";
+import {BrowserRouter, Route, Routes} from "react-router-dom";
 import MachinePage from "./pages/machine_page/machine_page";
+import FileList from "./pages/file_list/file_list";
 
-function App() {
+
+export default function App() {
     return (
-        <div className="App">
-            <MachinePage id="1Nb4EcfTI3bkMFOYG8nX4l92WaoHaYx4K"/>
-        </div>
+        <BrowserRouter>
+            <Routes>
+                <Route path="/machines/:machineId" element={<MachinePage/>}/>
+                <Route path="/folders/:folderId" element={<FileList/>}/>
+            </Routes>
+        </BrowserRouter>
     );
 }
 
-export default App;
+const root = ReactDOM.createRoot(document.getElementById('root'));
+
+root.render(<App/>);
+

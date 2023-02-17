@@ -1,13 +1,15 @@
 import React, {useEffect, useState} from 'react';
 import getFolders from "../../api/getFolders";
+import {useParams} from "react-router-dom";
 
 
-const MachinePage = ({id}) => {
+const MachinePage = () => {
     const [folders, setFolders] = useState([]);
+    const {machineId} = useParams();
 
     useEffect(() => {
         const fetchFolders = async () => {
-            const folders = await getFolders(id);
+            const folders = await getFolders(machineId);
             setFolders(folders);
         }
 
@@ -28,7 +30,10 @@ const MachinePage = ({id}) => {
                     <div className="grid grid-cols-2 gap-4">
                         {folders.map((folder) => (
                             <div className="bg-gray-100 p-4 rounded">
-                                <div className="text-xl font-bold">{folder.name}</div>
+                                <div className="text-xl font-bold"><a href={`/folders/${folder.id}`}>{folder.name}</a>
+                                </div>
+
+
                             </div>
                         ))}
                     </div>
