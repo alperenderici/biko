@@ -1,15 +1,19 @@
-import {useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 import getFiles from "../../api/getFiles";
 import {useParams} from "react-router-dom";
+import getFolderName from "../../api/getFolderName";
 
 
 const FileList = () => {
     const [files, setFiles] = useState([]);
+    const [folderName, setFolderName] = useState("");
     const {folderId} = useParams();
 
     useEffect(() => {
         const fetchFiles = async () => {
             const files = await getFiles(folderId);
+            const folderName = await getFolderName(folderId);
+            setFolderName(folderName);
             setFiles(files);
         }
 
@@ -27,11 +31,16 @@ const FileList = () => {
             </div>
             <div className="flex justify-center items-center mt-8">
                 <div className="bg-white rounded p-8 shadow-lg">
-                    <div className="text-2xl font-bold mb-4">{"a makinasi ya da klasor adi"}</div>
+                    <div className="text-2xl font-bold mb-4">{folderName}</div>
                     <div className="grid grid-cols-1 gap-4">
                         {files.map((file) => (
                             <div className="bg-gray-100 p-4 rounded">
-                                <div className="text-xl font-bold">{file.name}</div>
+                                <div className="bg-gray-100 p-4 rounded">
+                                    <div className="text-xl font-bold"><a href={`/pdf/${file.id}`}>{file.name}</a>
+                                    </div>
+
+
+                                </div>
                             </div>
                         ))}
                     </div>
