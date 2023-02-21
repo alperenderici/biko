@@ -1,4 +1,3 @@
-
 const express = require('express');
 const drive = require("./google/drive");
 const cors = require('cors');
@@ -61,18 +60,25 @@ app.get('/folders/:id', async (req, res) => {
 
 app.get('/files/load/:id', async (req, res) => {
     const id = req.params.id;
-    const response = await drive.files.get({
-        fileId: id,
-        mimeType: 'application/pdf',
-        alt: 'media'
-    })
 
-    const responseFile = response.data;
-    if (responseFile) {
-        return res.status(200).send(response.data);
+    try {
+        const result = await drive.files.get({
+            fileId: id,
+            mimeType: 'application/pdf',
+            alt: 'media',
+        });
+
+        if (result.status === 200) {
+            res.header('Content-Type', 'application/pdf');
+            return res.status(200).send(result.data);
+        }
+
+        return res.status(404).json({message: "No files found."});
+    } catch (err) {
+        return res.status(500).json({message: "The API returned an error: " + err});
+        throw err;
     }
 
-    return res.status(404).json({message: "No files found."});
 })
 
 app.get('/files/:id', async (req, res) => {

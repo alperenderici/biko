@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import getFolders from "../../api/getFolders";
 import {useParams} from "react-router-dom";
 import getFolderName from "../../api/getFolderName";
-import { ReactComponent as BikoLogoBeyaz } from "../../assets/images/BikoLogoBeyaz.svg";
+import {ReactComponent as BikoLogoBeyaz} from "../../assets/images/BikoLogoBeyaz.svg";
 
 const MachinePage = () => {
     const [folders, setFolders] = useState([]);
@@ -20,14 +20,15 @@ const MachinePage = () => {
     }, [machineId]);
 
     return (
-        <div className="bg-black min-h-screen">
+        <div className="bg-[#001489] min-h-screen">
             <div className="bg-white p-4 flex justify-between items-center">
-                <BikoLogoBeyaz className="h-12"/>
+                <div></div>
+                <div className="text-2xl font-bold mb-4 ">{machineName}</div>
+                <BikoLogoBeyaz className="h-12 justify-end"/>
             </div>
             <div className="flex justify-center items-center mt-8">
-                <div className="bg-white rounded p-8 shadow-lg">
+                <div className=" rounded p-8 shadow-lg">
 
-                    <div className="text-2xl font-bold mb-4">{machineName}</div>
 
                     <div className="grid grid-cols-1 gap-4">
                         {folders.map((folder) => (
@@ -38,11 +39,12 @@ const MachinePage = () => {
                             </div>
                         ))}
                         <div className="bg-gray-100 p-4 rounded">
-                                <div className="text-xl font-bold"><a href="https://www.bikomuhendislik.com" target="_blank" rel="noopener noreferrer">Proses Kontrol</a>
-                                </div>
-                                </div>
+                            <div className="text-xl font-bold"><a href="https://www.bikomuhendislik.com" target="_blank"
+                                                                  rel="noopener noreferrer">Proses Kontrol</a>
+                            </div>
+                        </div>
                     </div>
-                    
+
 
                 </div>
             </div>
