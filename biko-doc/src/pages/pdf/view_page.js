@@ -1,30 +1,10 @@
 //create component for PDF view
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import 'react-pdf/dist/esm/Page/AnnotationLayer.css';
 import {useParams} from "react-router-dom";
-import getPdf from "../../api/getPdf";
-import {Document, Page} from 'react-pdf/dist/esm/entry.webpack5';
 
 const ViewPage = () => {
-    const [numPages, setNumPages] = useState(null);
-    const [pageNumber, setPageNumber] = useState(1);
-    const [pdf, setPDF] = useState(null);
-
     const {fileId} = useParams();
-
-    useEffect(() => {
-            const fetchPDF = async () => {
-                const pdfData = await getPdf(fileId);
-                setPDF(pdfData);
-            }
-
-            fetchPDF();
-        }
-        , [fileId]);
-
-    function onDocumentLoadSuccess({numPages}) {
-        setNumPages(numPages);
-    }
 
     return (
         <div className="bg-black min-h-screen">
@@ -39,14 +19,8 @@ const ViewPage = () => {
                     <div className="flex justify-center items-center mt-8">
                         <div className="bg-white rounded p-8 shadow-lg">
                             <div>
-                                {!pdf && <span>Loading...</span>}
-
-                                <Document file={{url: pdf}} onLoadSuccess={onDocumentLoadSuccess}>
-                                    <Page pageNumber={pageNumber}/>
-                                </Document>
-                                <p>
-                                    Page {pageNumber} of {numPages}
-                                </p>
+                                <iframe src={"https://drive.google.com/file/d/" + fileId + "/preview"}
+                                        width={640} height={480}></iframe>
                             </div>
                         </div>
                     </div>

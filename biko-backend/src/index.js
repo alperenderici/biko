@@ -46,23 +46,16 @@ app.get('/folders/:id', async (req, res) => {
 })
 
 app.get('/files/load/:id', async (req, res) => {
-    const files = [];
     const id = req.params.id;
-    let responseFiles = [];
-    await drive.files.get({
-            fileId: id,
-            mimeType: 'application/pdf',
-            alt: 'media'
-        }, {responseType: 'blob'}, async (err, _res) => {
-            if (err) return res.status(500).json({message: "The API returned an error: " + err});
-            responseFiles.push(_res.data);
-        }
-    )
+    const response = await drive.files.get({
+        fileId: id,
+        mimeType: 'application/pdf',
+        alt: 'media'
+    })
 
-    if (responseFiles.length) {
-        res.header('Content-Type', 'application/pdf')
-        const buf = await responseFile.arrayBuffer();
-        return res.status(200).send(buf);
+    const responseFile = response.data;
+    if (responseFile) {
+        return res.status(200).send(response.data);
     }
 
     return res.status(404).json({message: "No files found."});
