@@ -38,12 +38,14 @@ const MachinePage = () => {
                             <div className="bg-gray-100 p-4 rounded">
                                 <div className="text-xl font-bold"><a href={`/folders/${folder.id}`}>{folder.name}</a>
                                 </div>
-
-
                             </div>
                         ))}
+                        <div className="bg-gray-100 p-4 rounded">
+                                <div className="text-xl font-bold"><a href="https://www.bikomuhendislik.com" target="_blank" rel="noopener noreferrer">Proses Kontrol</a>
+                                </div>
+                                </div>
                     </div>
-
+                    
 
                 </div>
             </div>

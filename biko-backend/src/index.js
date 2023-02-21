@@ -1,4 +1,3 @@
-// simple express backend
 const express = require('express');
 const drive = require("./google/drive");
 const cors = require('cors');
@@ -8,6 +7,19 @@ app.use(cors());
 app.get('/', (req, res) => {
     res.send('Hello World!')
 });
+
+app.get('/pdf/name', async (req, res) => {
+    const fileId = req.query.fileId;
+
+    await drive.files.get({
+        fileId: fileId,
+        fields: 'name'
+    }, (err, _res) => {
+        if (err) return res.status(500).json({message: "The API returned an error: " + err});
+        const pdfName = _res.data.name;
+        return res.status(200).json(pdfName);
+    })
+})
 
 app.get('/folders/name', async (req, res) => {
     const folderId = req.query.folderId;
@@ -23,6 +35,7 @@ app.get('/folders/name', async (req, res) => {
     })
 
 })
+
 app.get('/folders/:id', async (req, res) => {
     const folders = [];
     const id = req.params.id;
@@ -61,7 +74,6 @@ app.get('/files/load/:id', async (req, res) => {
     return res.status(404).json({message: "No files found."});
 })
 
-
 app.get('/files/:id', async (req, res) => {
     const files = [];
     const id = req.params.id;
@@ -83,6 +95,5 @@ app.get('/files/:id', async (req, res) => {
         return res.status(200).json(files);
     })
 })
-
 
 app.listen(7000, () => console.log('Example app listening on port 7000!'));
