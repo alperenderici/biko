@@ -5,7 +5,6 @@ import getPdfName from '../../api/getPdfName';
 import {ReactComponent as BikoLogoBeyaz} from "../../assets/images/BikoLogoBeyaz.svg";
 import getPdf from "../../api/getPdf";
 import "./view_page.css";
-// import '@react-pdf-viewer/core/lib/styles/index.css';
 import { FaArrowLeft } from 'react-icons/fa';
 import '../../assets/fonts/fonts.css'; 
 
@@ -13,9 +12,7 @@ import '../../assets/fonts/fonts.css';
 const ViewPage = () => {
     const {fileId} = useParams();
     const [pdfName, setPdfName] = React.useState("");
-    const [pdf, setPdf] = React.useState([]);
-    // const [numPages, setNumPages] = React.useState(null);
-    // const [pageNumber, setPageNumber] = React.useState(1);
+    const [,setPdf] = React.useState([]);
     const navigate = useNavigate();
 
 
@@ -35,32 +32,29 @@ const ViewPage = () => {
         fileId
     ])
 
-    // function onDocumentLoadSuccess({numPages}) {
-    //     setNumPages(numPages);
-    // }
-
     return (
-        <div className="bg-[#001489] min-h-screen">
-            <div className="bg-white p-4 flex justify-between items-center">
-                <button className="button-icon" onClick={() => navigate(-1)}>
+        <div className="bg-[#001489] min-h-screen overflow-hidden"> 
+            <div className="bg-white p-2 flex justify-between items-center">
+                <button className="button-icon text-flex md:text-2xl lg:text-3xl" onClick={() => navigate(-1)}>
                 <FaArrowLeft />
                 </button>
-                <div className="text-2xl mb-4" style={{fontFamily:'Nexa-Heavy', color:'#001489'}}>{pdfName}</div>
-                <BikoLogoBeyaz className="h-12"/>
+                <div className="text-flex md:text-2xl lg:text-3xl p-2" style={{fontFamily:'Nexa-Heavy', color:'#001489'}}>{pdfName}</div>
+                <BikoLogoBeyaz className="h-12 sm:h-8 md:h-10 lg:h-12 xl:h-16 w-auto justify-end"/>
             </div>
-            <div className="flex justify-center items-center mt-8">
-                <div className="rounded p-8">
-                    <div className="flex justify-center items-center mt-8">
-                        <div className="bg-white rounded p-8 shadow-lg">
-                            <div>
+            <div className="flex justify-center items-center mt-4">
+                <div className="rounded p-2">
+                    <div className="flex justify-center items-center ">
+                        <div className="bg-white rounded p-2 shadow-lg relative">
+                            <div className='h-[500px] sm:h-[700px] sm:max-w-full sm:w-[700px] md:h-[1000px] md:max-w-full md:w-[700px] lg:h-[1200px] lg:max-w-full lg:w-[800px]'>
                                 <iframe title='pdf'
                                     src={"https://drive.google.com/file/d/" + fileId + "/preview"}
-                                    height="500px" width="650px"></iframe>
+                                    allowFullScreen height='100%' width='100%'></iframe>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+           
         </div>
     );
 }

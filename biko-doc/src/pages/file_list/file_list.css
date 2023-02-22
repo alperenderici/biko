@@ -1,15 +1,15 @@
 .button-icon {
-    background-color: transparent;
+    background-color: #001489;
     border: none;
     outline: none;
     cursor: pointer;
     border-radius: 50%;
     padding: 10px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-    color: #001489;
+    color: #e0e0e0;
   }
   
   .button-icon:focus,
   .button-icon:hover {
-    background-color: #e0e0e0;
+    background-color: #001489;
   }
