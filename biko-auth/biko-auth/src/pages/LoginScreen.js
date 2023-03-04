@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { auth } from "./firebase/firebase";
+import { getUsers } from "../service/firebase.js";
 
 function LoginScreen() {
   const [name, setName] = useState("");
@@ -10,7 +10,7 @@ function LoginScreen() {
     e.preventDefault();
 
     try {
-      await auth.signInWithEmailAndPassword(name, password);
+      await getUsers.signInWithEmailAndPassword(name, password);
     } catch (err) {
       setError("Name or password is incorrect.");
     }

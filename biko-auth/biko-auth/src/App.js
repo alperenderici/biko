@@ -1,48 +1,18 @@
-import { useEffect, useState } from "react";
-import { BrowserRouter as Router, Route} from "react-router-dom";
-import { auth } from "./firebase/firebase";
-import LoginScreen from "./pages/LoginScreen";
-import MachineListScreen from "./pages/MachineListScreen";
+import ReactDOM from "react-dom/client";
+import {BrowserRouter, Route, Routes} from "react-router-dom";
+import LoginFormPage from "./pages/login_form_page";
+import MachinesListPage from "./pages/machine_list_page";
 
-function App() {
-  const [user, setUser] = useState(null);
-  const [isLoading, setIsLoading] = useState(true);
-
-  useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged((user) => {
-      setUser(user);
-      setIsLoading(false);
-    });
-
-    return unsubscribe;
-  }, []);
-
+export default function App() {
   return (
-    <Router>
-      <div className="App">
-        {isLoading ? (
-          <div>Loading...</div>
-        ) : (
-          <>
-            {!user ? (
-              <Route path="/" exact>
-                <LoginScreen />
-              </Route>
-            ) : (
-              <>
-                <Route path="/" exact>
-                  <Redirect to="/machines" />
-                </Route>
-                <Route path="/machines">
-                  <MachineListScreen />
-                </Route>
-              </>
-            )}
-          </>
-        )}
-      </div>
-    </Router>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/auth" element={<LoginFormPage />} />
+        <Route path="/machines" element={<MachinesListPage />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
+const root = ReactDOM.createRoot(document.getElementById('root'));
 
-export default App;
+root.render(<App/>);
