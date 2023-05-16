@@ -17,12 +17,23 @@ const LoginFormPage = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         const user = await login(email, password);
-        if (user) {
+        if(user){
             dispatch(loginAction(user));
             navigate('/machines', {
                 replace: true
             });
         }
+        // if (user.user.email == "alperen@alperen.com") {
+        //     dispatch(loginAction(user));
+        //     navigate('/register', {
+        //         replace: true
+        //     });
+        // } else if(user){
+        //     dispatch(loginAction(user));
+        //     navigate('/machines', {
+        //         replace: true
+        //     });
+        // }
     }
 
     return (
