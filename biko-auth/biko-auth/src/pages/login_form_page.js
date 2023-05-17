@@ -1,6 +1,4 @@
 import React, {useState} from 'react';
-// import { Link } from 'react-router-dom';
-// import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import {login} from '../service/firebase';
 import {ReactComponent as BikoLogoBeyaz} from "../assets/images/BikoLogoBeyaz.svg";
@@ -23,17 +21,17 @@ const LoginFormPage = () => {
                 replace: true
             });
         }
-        // if (user.user.email == "alperen@alperen.com") {
-        //     dispatch(loginAction(user));
-        //     navigate('/register', {
-        //         replace: true
-        //     });
-        // } else if(user){
-        //     dispatch(loginAction(user));
-        //     navigate('/machines', {
-        //         replace: true
-        //     });
-        // }
+        if (user.user.email == "admin1@admin.com") {
+            dispatch(loginAction(user));
+            navigate('/register', {
+                replace: true
+            });
+        } else if(user){
+            dispatch(loginAction(user));
+            navigate('/machines', {
+                replace: true
+            });
+        }
     }
 
     return (
@@ -83,15 +81,6 @@ const LoginFormPage = () => {
                 </div>
             </div>
         </div>
-
-        
-            
-
     );
-
-
-
-
-
 } 
 export default LoginFormPage;

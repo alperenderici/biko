@@ -20,22 +20,7 @@ const MachinesListPage = () => {
         };
         fetchMachines();
       }, []);
-
       
-
-    // useEffect(() => {
-    //     if (!user) {
-    //         navigate('/login', {
-    //             replace: true
-    //         });
-    //     }
-    //     const fetchMachines = async () => {
-    //         const machines = await getMachines();
-    //         setMachines(machines);
-    //     }
-    //     fetchMachines();
-    // }, [user]);
-
     const handleLogout = async () => {
         await logout();
         dispatch(logoutAction());
